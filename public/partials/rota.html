@@ -1,0 +1,92 @@
+<div class="jumbotron">
+  <h1 class="text-center">Calculo de rotas</h1>
+  <div class="alert alert-warning" role="alert" ng-show="aviso.texto">
+    {{aviso.texto}}
+  </div>
+  <div class="alert alert-danger" role="alert" ng-show="erro.texto">
+    {{erro.texto}}
+  </div>
+  <form ng-submit="calcularRota()">
+
+    <div class="form-group">
+      <label for="logradouro">Nome da rua/avenida</label>
+      <input type="text" class="form-control" id="logradouro" name="logradouro" ng-model="endereco.logradouro">
+    </div>
+    <div class="form-group">
+      <label for="numero">Número</label>
+      <input type="text" class="form-control" id="numero" name="numero" ng-model="endereco.numero">
+    </div>
+    <div class="form-group">
+      <label for="cidade">Cidade</label>
+      <input type="text" class="form-control" id="cidade" name="cidade" ng-model="endereco.cidade">
+    </div>
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <input type="text" class="form-control" id="estado" name="estado" ng-model="endereco.estado">
+    </div>
+    <div>
+      <a ng-click="addEndereco()" class="btn btn-default">Adicionar</a>
+    </div>
+    <br/>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tr>
+          <th>Endereços</th>
+        </tr>
+        <tr ng-show="enderecos.length === 0">
+          <td>
+            Adicione endereços para calculo.
+          </td>
+        </tr>
+        <tr ng-repeat="end in enderecos">
+          <td>{{end.logradouro}} {{end.numero}}, {{end.cidade}} - {{end.estado}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="form-group">
+      <label for="preco">Preço por litro de combustível</label>
+      <input type="text" class="form-control" id="preco" name="preco" required ng-model="precoLitro">
+    </div>
+    <div class="form-group">
+      <label for="autonomia">Quilometragem por litro de combustível</label>
+      <input type="text" class="form-control" id="autonomia" name="autonomia" required ng-model="autonomia">
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Calcular</button>
+    </div>
+  </form>
+  <br/>
+  <div ng-hide="valoresTotais.tempo === -1" class="text-center" style="border: 1px solid">
+    <p>
+      Valores
+    </p>
+    <div>
+      <label for="tempo">Tempo:</label>
+      <label id="tempo" name="tempo">{{valoresTotais.tempo}} {{valoresTotais.medidaTempo}}</label>
+    </div>
+    <div>
+      <label for="distancia">Distância:</label>
+      <label id="distancia" name="distancia">{{valoresTotais.distancia}} {{valoresTotais.medidaDistancia}}</label>
+    </div>
+    <div>
+      <label for="custoCombustivel">Custo em combustível:</label>
+      <label id="custoCombustivel" name="custoCombustivel">R${{valoresTotais.custoCombustivel}}</label>
+    </div>
+    <div>
+      <label for="custoTotal">Custo total:</label>
+      <label id="custoTotal" name="custoTotal">R${{valoresTotais.custoTotal}}</label>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h1>Calculando...</h1>
+    </div>
+    <div class="modal-body">
+    </div>
+    </div>
+  </script>
+
+</div>
